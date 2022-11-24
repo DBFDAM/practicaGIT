@@ -20,30 +20,32 @@ namespace WindowsFormsApp1
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             string textoTelegrama;
-            char tipoTelegrama = ' ';
             int numPalabras = 0;
-            double coste;
+            double coste = 0;
             //Leo el telegrama
             textoTelegrama = txtTelegrama.Text;
-            //Obtengo el número de palabras que forma el telegrama 
-            numPalabras = textoTelegrama.Length;
+
+            //Obtengo el número de palabras que forma el telegrama
+            string[] palabras = textoTelegrama.Split(' ');
+            numPalabras = palabras.Length;
+
             // telegrama urgente?
             if (radioUrgente.Checked)
+            {
                 if (numPalabras <= 10)
                     coste = 5;
                 else
                     coste = 5 + 0.75 * (numPalabras - 10);
-            else
-                coste = 0;
-
-            if (radioOrdinario.Checked)
+            }
+            if (radioOrdinario.Checked) 
+            {
                 if (numPalabras <= 10)
-                    coste = 25;
+                    coste = 2.5;
                 else
-                    coste = 0.5 * numPalabras;
+                    coste = 2.5 + 0.5 * (numPalabras - 10);
+            }
 
-            txtPrecio.Text = coste.ToString() + " euros";
+            txtPrecio.Text = coste + " euros";
         }
     }
 }
-
